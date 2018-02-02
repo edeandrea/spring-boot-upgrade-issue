@@ -62,7 +62,7 @@ public class CustomSecurityAutoConfiguration extends WebSecurityConfigurerAdapte
 	@Autowired
 	private MyAppSecurityProperties myAppSecurityProperties;
 
-	@Bean(name = "acidAuthenticationFilter")
+	@Bean(name = "myAuthenticationFilter")
 	@ConditionalOnBean(UserDetailsService.class)
 	public Filter authenticationFilter(MyAppSecurityProperties myAppSecurityProperties) throws Exception {
 		if (myAppSecurityProperties.isEnabled()) {
@@ -76,7 +76,7 @@ public class CustomSecurityAutoConfiguration extends WebSecurityConfigurerAdapte
 	@Bean
 	@ConditionalOnMissingBean(CsrfTokenRepository.class)
 	@ConditionalOnProperty(prefix = "security", name = "enable-csrf", matchIfMissing = true)
-	public CsrfTokenRepository acidCsrfTokenRepository(MyAppSecurityProperties myAppSecurityProperties) {
+	public CsrfTokenRepository myCsrfTokenRepository(MyAppSecurityProperties myAppSecurityProperties) {
 		if (myAppSecurityProperties.isEnabled()) {
 			return CookieCsrfTokenRepository.withHttpOnlyFalse();
 		}
