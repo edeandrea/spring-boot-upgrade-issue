@@ -63,7 +63,7 @@ public class HeaderUserFilterTests {
 	@Test
 	public void testAuthenticationFilterCorrect() {
 		// @formatter:off
-		assertThat(this.appContext.getBean("acidAuthenticationFilter", Filter.class))
+		assertThat(this.appContext.getBean("myAuthenticationFilter", Filter.class))
 			.as("acidAuthenticationFilter should be of type %s", HeaderUserFilter.class)
 			.isExactlyInstanceOf(HeaderUserFilter.class);
 		// @formatter:on
