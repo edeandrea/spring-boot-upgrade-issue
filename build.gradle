@@ -1,0 +1,45 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.10.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.example.springbootupgrade'
+version = '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	compile 'org.springframework.boot:spring-boot-starter-log4j2'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile "org.apache.commons:commons-lang3:${property('commons-lang3.version')}"
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.springframework.security:spring-security-test'
+}
+
+configurations.all {
+	resolutionStrategy {
+		// Set the dynamic/changing versions timeout to 5 minutes
+		cacheDynamicVersionsFor 5, 'minutes'
+		cacheChangingModulesFor 5, 'minutes'
+
+		// Exclude the spring-boot-starter-logging dependency across all configurations
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+}
